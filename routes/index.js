@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 
 var quizController = require('../controllers/quiz_controller.js');
+var creditosController = require('../controllers/creditos_controller.js');
+
 
 console.log('VFG [router]');
 
@@ -13,5 +15,7 @@ router.get('/', function(req, res) {
 
 router.get('/quizes/question', quizController.question);
 router.get('/quizes/answer', quizController.answer);
+
+router.get('/author', creditosController.show);
 
 module.exports = router;
