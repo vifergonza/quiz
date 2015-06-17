@@ -25,7 +25,7 @@ var sequelizeBd = new sequelizeOrm(dbName, user, pwd, {
 });
 
 //Importar la definicion de la tabla Quiz en quiz.js
-var quizTabla = sequelizeBd.import(path.join(__dirname, 'Quiz'));
+var quizTabla = sequelizeBd.import(path.join(__dirname, 'quiz'));
 
 //exportar la definicion de la tabla
 exports.quiz = quizTabla;
