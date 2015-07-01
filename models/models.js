@@ -42,6 +42,13 @@ sequelizeBd.sync().then(function() {
                 .then(function() {
                     console.log('Tabla Quiz inicializa');
                 });
+            quizTabla.create({
+                    pregunta: '¿Capital de Portugal?',
+                    respuesta: 'Lisboa'
+                })
+                .then(function() {
+                    console.log('Tabla Quiz inicializa');
+                });
         }
     });
 });
