@@ -1,4 +1,11 @@
 <div>
+
+<form method="get" action="/quizes"> 
+	<p>Introduzca filtro</p>
+	<input type="text" name="search" value="" />
+	<input type="submit" value="Buscar" />
+</form>   
+
 <ol>
 	<% var i; for (i=0; i<preguntas.length; i++) { %>
 		<li> <a href="quizes/<%= preguntas[i].id%>"> <%= preguntas[i].pregunta %></a> </li>

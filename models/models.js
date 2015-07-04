@@ -38,16 +38,26 @@ sequelizeBd.sync().then(function() {
             quizTabla.create({
                     pregunta: '¿Capital de Italia?',
                     respuesta: 'Roma'
-                })
-                .then(function() {
-                    console.log('Tabla Quiz inicializa');
                 });
             quizTabla.create({
                     pregunta: '¿Capital de Portugal?',
                     respuesta: 'Lisboa'
-                })
-                .then(function() {
-                    console.log('Tabla Quiz inicializa');
+                });
+            quizTabla.create({
+                    pregunta: '¿En que lenguaje esta programado esto?',
+                    respuesta: 'Node'
+                });
+            quizTabla.create({
+                    pregunta: '¿Cual es el control de versiones que usamos?',
+                    respuesta: 'Git'
+                });
+            quizTabla.create({
+                    pregunta: '¿En que plataforma hemos desplegado la aplicacion?',
+                    respuesta: 'Heroku'
+                });
+            quizTabla.create({
+                    pregunta: '¿Capital de Francia?',
+                    respuesta: 'Paris'
                 });
         }
     });

@@ -16,7 +16,14 @@ exports.loadQuiz = function(req, res, next, quizId) {
 
 ///quizes
 exports.index = function(req, res) {
-    model.quiz.findAll().then(function(quizes) {
+    var sqlOptions = {};
+    if (null!=req.query.search){
+        var filtro = "%"+req.query.search.replace(" ", "%")+"%";
+        sqlOptions.where = ["pregunta like ?", filtro ] ;
+        sqlOptions.order = [["pregunta", "ASC"]] ;
+        console.log(sqlOptions);
+    }
+    model.quiz.findAll(sqlOptions).then(function(quizes) {
         res.render('quizes/index', {
             preguntas: quizes,
             title: 'Quizes'
