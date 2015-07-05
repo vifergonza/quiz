@@ -33,7 +33,9 @@ exports.quiz = quizTabla;
 //sequelize.sync() crea e inicializa tabla de preguntas en DB
 sequelizeBd.sync().then(function() {
     //Ejecuta el manejador una vez creada la tabla
+    console.log("INICIALIZANDO LA BASE DE DATOS")
     quizTabla.count().then(function(count) {
+        console.log("Numero de preguntas: "+count)
         if (0 === count) {
             quizTabla.create({
                     pregunta: '¿Capital de Italia?',
