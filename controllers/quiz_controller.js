@@ -19,7 +19,7 @@ exports.index = function(req, res) {
     var sqlOptions = {};
     if (null!=req.query.search){
         var filtro = "%"+req.query.search.replace(" ", "%")+"%";
-        sqlOptions.where = ["pregunta like ?", filtro ] ;
+        sqlOptions.where = ["upper(pregunta) like upper(?)", filtro ] ;
         sqlOptions.order = [["pregunta", "ASC"]] ;
         console.log(sqlOptions);
     }
