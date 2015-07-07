@@ -1,0 +1,8 @@
+	<form method="post" action="/quizes/new"> 
+		<label for="inputPregunta" class="rem">Pregunta:</label>	
+		<input type="text" id="inputPregunta" name="quiz[pregunta]" value="<%= quiz.pregunta%>" />
+		<label for="inputRespuesta" class="rem">Respuesta:</label>
+		<input type="text" id="inputRespuesta" name="quiz[respuesta]" value="<%= quiz.respuesta%>" />
+		<a href="/quizes"><button type="button">Cancelar</button></a>
+		<input type="submit" value="Enviar" />
+	</form> 

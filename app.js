@@ -19,9 +19,7 @@ app.use(partials());
 app.use(favicon(__dirname + '/public/images/toySoldier.png'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-    extended: false
-}));
+app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 

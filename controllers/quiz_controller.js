@@ -17,10 +17,12 @@ exports.loadQuiz = function(req, res, next, quizId) {
 ///quizes
 exports.index = function(req, res) {
     var sqlOptions = {};
-    if (null!=req.query.search){
-        var filtro = "%"+req.query.search.replace(" ", "%")+"%";
-        sqlOptions.where = ["upper(pregunta) like upper(?)", filtro ] ;
-        sqlOptions.order = [["pregunta", "ASC"]] ;
+    if (null != req.query.search) {
+        var filtro = "%" + req.query.search.replace(" ", "%") + "%";
+        sqlOptions.where = ["upper(pregunta) like upper(?)", filtro];
+        sqlOptions.order = [
+            ["pregunta", "ASC"]
+        ];
         console.log(sqlOptions);
     }
     model.quiz.findAll(sqlOptions).then(function(quizes) {
@@ -56,5 +58,32 @@ exports.answer = function(req, res) {
             title: 'Quizes'
         });
     }
+
+};
+
+///quizes/new
+exports.new = function(req, res) {
+    //Creamos un objeto no persistente vacio para que no rompa el formulario y nos sirva
+    //tambien para la edicion
+    var newQuiz = model.quiz.build({
+        pregunta: "Escriba la pregunta",
+        respuesta: "Escriba la respuesta"
+    });
+    res.render('quizes/new', {
+        quiz: newQuiz,
+        title: 'Nueva pregunta'
+    });
+};
+
+///quizes/create
+exports.create = function(req, res) {
+    //Creamos un objeto con los datos del formulario
+    var newQuiz = model.quiz.build(req.body.quiz);
+    //lo persistimos
+    newQuiz.save({
+        fields: ["pregunta", "respuesta"]
+    }).then(function() {
+        res.redirect('/quizes');
+    });
 
 };

@@ -9,14 +9,18 @@ console.log('VFG [router]');
 
 /* GET home page. */
 router.get('/', function(req, res) {
-  console.log('VFG [router, get]');
-  res.render('index', { title: 'Quiz' });
+    console.log('VFG [router, get]');
+    res.render('index', {
+        title: 'Quiz'
+    });
 });
 
 //Autoload de preguntas en funcion del parametro :quizId
 router.param('quizId', quizController.loadQuiz);
 
 router.get('/quizes', quizController.index);
+router.get('/quizes/new', quizController.new);
+router.post('/quizes/new', quizController.create);
 router.get('/quizes/:quizId(\\d+)', quizController.show);
 router.get('/quizes/:quizId(\\d+)/answer', quizController.answer);
 
