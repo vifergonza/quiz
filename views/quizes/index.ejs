@@ -8,7 +8,10 @@
 
 <ol>
 	<% var i; for (i=0; i<preguntas.length; i++) { %>
-		<li> <a href="quizes/<%= preguntas[i].id%>"> <%= preguntas[i].pregunta %></a> </li>
+		<li> 
+			<a href="quizes/<%= preguntas[i].id%>"> <%= preguntas[i].pregunta %></a> 
+			<a href="quizes/<%= preguntas[i].id%>/edit"> <button type="button">editar</button> </a>
+		</li>
 	<% } %>
 </ol>
 

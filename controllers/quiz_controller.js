@@ -67,14 +67,20 @@ exports.answer = function(req, res) {
 
 ///quizes/new
 exports.new = function(req, res) {
-    //Creamos un objeto no persistente vacio para que no rompa el formulario y nos sirva
-    //tambien para la edicion
-    var newQuiz = model.quiz.build({
-        pregunta: "Escriba la pregunta",
-        respuesta: "Escriba la respuesta"
-    });
+    var tempQuiz = null;
+    if (req.quiz) {
+        //si quiz viene informado paso por el autoload y estamos en edicion
+        tempQuiz = req.quiz;
+    } else {
+        //Creamos un objeto no persistente vacio para que no rompa el formulario y nos sirva
+        //tambien para la edicion
+        tempQuiz = model.quiz.build({
+            pregunta: "Escriba la pregunta",
+            respuesta: "Escriba la respuesta"
+        });
+    }
     res.render('quizes/new', {
-        quiz: newQuiz,
+        quiz: tempQuiz,
         title: 'Nueva pregunta',
         errors: []
     });
@@ -82,8 +88,16 @@ exports.new = function(req, res) {
 
 ///quizes/create
 exports.create = function(req, res) {
-    //Creamos un objeto con los datos del formulario
-    var newQuiz = model.quiz.build(req.body.quiz);
+    var newQuiz = null;
+    if (req.quiz) {
+        //Estamos modificando
+        newQuiz = req.quiz;
+        newQuiz.pregunta = req.body.quiz.pregunta;
+        newQuiz.respuesta = req.body.quiz.respuesta
+    } else {
+        //Creamos un objeto con los datos del formulario
+        newQuiz = model.quiz.build(req.body.quiz);
+    }
     //lo validamos y persistimos
     newQuiz.validate().then(function(error) {
         if (error) {

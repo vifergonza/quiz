@@ -1,5 +1,14 @@
+	<%
+	var action = null;
+	if (quiz.id) {
+		action = '/quizes/'+quiz.id+'/edit?_method=put'
+	} else {
+		action = '/quizes/new';
+	}
+	%>
 
-	<form method="post" action="/quizes/new"> 
+	<form method="post" action="<%=action%>"> 
+		<input type="hidden" id="hiddenId" name="quiz[id]" value="<%= quiz.id%>" />
 		<label for="inputPregunta" class="rem">Pregunta:</label>	
 		<input type="text" id="inputPregunta" name="quiz[pregunta]" value="<%= quiz.pregunta%>" />
 		<label for="inputRespuesta" class="rem">Respuesta:</label>
