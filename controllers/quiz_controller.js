@@ -28,7 +28,8 @@ exports.index = function(req, res) {
     model.quiz.findAll(sqlOptions).then(function(quizes) {
         res.render('quizes/index', {
             preguntas: quizes,
-            title: 'Quizes'
+            title: 'Quizes',
+            errors: []
         });
     }).catch(function(error) {
         next(error);
@@ -39,7 +40,8 @@ exports.index = function(req, res) {
 exports.show = function(req, res) {
     res.render('quizes/show', {
         pregunta: req.quiz,
-        title: 'Quizes'
+        title: 'Quizes',
+        errors: []
     });
 };
 
@@ -49,13 +51,15 @@ exports.answer = function(req, res) {
         res.render('quizes/answer', {
             pregunta: req.quiz,
             respuesta: 'Correcta',
-            title: 'Quizes'
+            title: 'Quizes',
+            errors: []
         });
     } else {
         res.render('quizes/answer', {
             pregunta: req.quiz,
             respuesta: 'Incorrecta',
-            title: 'Quizes'
+            title: 'Quizes',
+            errors: []
         });
     }
 
@@ -71,7 +75,8 @@ exports.new = function(req, res) {
     });
     res.render('quizes/new', {
         quiz: newQuiz,
-        title: 'Nueva pregunta'
+        title: 'Nueva pregunta',
+        errors: []
     });
 };
 
@@ -79,11 +84,19 @@ exports.new = function(req, res) {
 exports.create = function(req, res) {
     //Creamos un objeto con los datos del formulario
     var newQuiz = model.quiz.build(req.body.quiz);
-    //lo persistimos
-    newQuiz.save({
-        fields: ["pregunta", "respuesta"]
-    }).then(function() {
-        res.redirect('/quizes');
+    //lo validamos y persistimos
+    newQuiz.validate().then(function(error) {
+        if (error) {
+            res.render('quizes/new', {
+                quiz: newQuiz,
+                errors: error.errors
+            });
+        } else {
+            newQuiz.save({
+                fields: ["pregunta", "respuesta"]
+            }).then(function() {
+                res.redirect('/quizes');
+            });
+        }
     });
-
 };

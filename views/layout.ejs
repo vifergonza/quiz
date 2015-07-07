@@ -25,6 +25,19 @@
   		</nav>
 
 	  	<section class="main" id="s1">
+
+  <% if (errors) { 
+    console.log("ERRORES:   \n")
+    console.log(errors);
+  %>
+  <ul class="listaErrores">
+    <% for (i=0 ; i<errors.length; i++) { %>
+      <li><%=errors[i].message%></li>
+    <% } %>
+  </ul>
+  <% } %>
+
+      
   			<%- body %>
   		</section>
 

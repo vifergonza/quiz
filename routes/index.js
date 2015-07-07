@@ -11,7 +11,8 @@ console.log('VFG [router]');
 router.get('/', function(req, res) {
     console.log('VFG [router, get]');
     res.render('index', {
-        title: 'Quiz'
+        title: 'Quiz',
+        errors: []
     });
 });
 

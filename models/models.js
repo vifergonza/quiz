@@ -1,6 +1,6 @@
 var path = require('path');
 
-//Cargar modelo ORM	
+//Cargar modelo ORM 
 var sequelizeOrm = require('sequelize');
 
 //Configuracion de entorno
@@ -35,32 +35,32 @@ sequelizeBd.sync().then(function() {
     //Ejecuta el manejador una vez creada la tabla
     console.log("INICIALIZANDO LA BASE DE DATOS")
     quizTabla.count().then(function(count) {
-        console.log("Numero de preguntas: "+count)
+        console.log("Numero de preguntas: " + count)
         if (0 === count) {
             quizTabla.create({
-                    pregunta: '¿Capital de Italia?',
-                    respuesta: 'Roma'
-                });
+                pregunta: '¿Capital de Italia?',
+                respuesta: 'Roma'
+            });
             quizTabla.create({
-                    pregunta: '¿Capital de Portugal?',
-                    respuesta: 'Lisboa'
-                });
+                pregunta: '¿Capital de Portugal?',
+                respuesta: 'Lisboa'
+            });
             quizTabla.create({
-                    pregunta: '¿En que lenguaje esta programado esto?',
-                    respuesta: 'Node'
-                });
+                pregunta: '¿En que lenguaje esta programado esto?',
+                respuesta: 'Node'
+            });
             quizTabla.create({
-                    pregunta: '¿Cual es el control de versiones que usamos?',
-                    respuesta: 'Git'
-                });
+                pregunta: '¿Cual es el control de versiones que usamos?',
+                respuesta: 'Git'
+            });
             quizTabla.create({
-                    pregunta: '¿En que plataforma hemos desplegado la aplicacion?',
-                    respuesta: 'Heroku'
-                });
+                pregunta: '¿En que plataforma hemos desplegado la aplicacion?',
+                respuesta: 'Heroku'
+            });
             quizTabla.create({
-                    pregunta: '¿Capital de Francia?',
-                    respuesta: 'Paris'
-                });
+                pregunta: '¿Capital de Francia?',
+                respuesta: 'Paris'
+            });
         }
     });
 });
