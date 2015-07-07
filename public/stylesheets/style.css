@@ -38,3 +38,7 @@ nav span {
 .listaErrores {
     color: red;
 }
+
+ol > li {
+    margin-top: 10px;
+}

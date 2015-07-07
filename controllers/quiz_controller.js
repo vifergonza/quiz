@@ -114,3 +114,10 @@ exports.create = function(req, res) {
         }
     });
 };
+
+///quizes/:quizId Delete
+exports.delete = function(req, res) {
+    req.quiz.destroy().then(function() {
+        res.redirect('/quizes');
+    });
+};
