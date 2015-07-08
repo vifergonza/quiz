@@ -57,3 +57,7 @@ form > p {
     text-align: left;
     <
 }
+
+.right {
+    float: right;
+}

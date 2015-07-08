@@ -4,6 +4,7 @@ var router = express.Router();
 var quizController = require('../controllers/quiz_controller.js');
 var creditosController = require('../controllers/creditos_controller.js');
 var commentController = require('../controllers/comment_controller.js');
+var sessionController = require('../controllers/session_controller.js');
 
 console.log('VFG [router]');
 
@@ -32,5 +33,10 @@ router.get('/quizes/:quizId(\\d+)/comments', commentController.new);
 router.post('/quizes/:quizId(\\d+)/comments', commentController.create);
 
 router.get('/author', creditosController.show);
+
+//Enrutamiento de la gestion de session
+router.get('/login', sessionController.new);
+router.post('/login', sessionController.create);
+router.get('/logout', sessionController.destroy);
 
 module.exports = router;
