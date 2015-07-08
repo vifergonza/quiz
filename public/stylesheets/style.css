@@ -41,4 +41,14 @@ nav span {
 
 ol > li {
     margin-top: 10px;
+    text-align: left;
+    padding-left: 15px;
+}
+
+form > p {
+    margin-top: 5px;
+}
+
+.fontSmall {
+    font-size: smaller;
 }

@@ -10,10 +10,12 @@
 	<% var i; for (i=0; i<preguntas.length; i++) { %>
 		<li> 
 			<a href="quizes/<%= preguntas[i].id%>"> <%= preguntas[i].pregunta %></a> 
-			<p><a href="quizes/<%= preguntas[i].id%>/edit"> <button type="button">editar</button> </a></p>
+			<span class="fontSmall"> (<%= preguntas[i].tema %>)</span>
+			<p><a href="quizes/<%= preguntas[i].id%>/edit"> <button type="button">editar</button> </a>
 			<form method="post" action="quizes/<%= preguntas[i].id%>/delete?_method=delete" > 
 				<button type="submit" onclick="return confirm('Borrar: <%=preguntas[i].pregunta%>');">Borrar</button> 
 			</form>
+			</p>
 		</li>
 	<% } %>
 </ol>

@@ -9,10 +9,64 @@
 
 	<form method="post" action="<%=action%>"> 
 		<input type="hidden" id="hiddenId" name="quiz[id]" value="<%= quiz.id%>" />
+		<p>
+		<label for="selectCategoria" class="rem">Categoria:</label>
+
+		<select id="selectCategoria" name="quiz[tema]">
+			<% 
+				var selected = "" ;
+				if (null==quiz.tema || quiz.tema=="otro") {
+					selected = "selected";
+				} else {
+					selected = "";
+				}
+			%>
+  			<option value="otro" <%= selected %> >Otro</option>
+  			<% 
+				if (quiz.tema=="humanidades") {
+					selected = "selected";
+				} else {
+					selected = "";
+				}
+			%>
+
+  			<option value="humanidades" <%= selected %> >Humanidades</option>
+			<% 
+				if (quiz.tema=="ocio") {
+					selected = "selected";
+				} else {
+					selected = "";
+				}
+			%>
+  			<option value="ocio" <%= selected %> >Ocio</option>
+  			<% 
+				if (quiz.tema=="ciencia") {
+					selected = "selected";
+				} else {
+					selected = "";
+				}
+			%>
+  			<option value="ciencia" <%= selected %> >Ciencia</option>
+  			<% 
+				if (quiz.tema=="tecnologia") {
+					selected = "selected";
+				} else {
+					selected = "";
+				}
+			%>
+  			<option value="tecnologia" <%= selected %> >Tecnología</option>
+		</select>
+		</p>
+		<p>
 		<label for="inputPregunta" class="rem">Pregunta:</label>	
 		<input type="text" id="inputPregunta" name="quiz[pregunta]" value="<%= quiz.pregunta%>" />
+		</p>
+		<p>
 		<label for="inputRespuesta" class="rem">Respuesta:</label>
 		<input type="text" id="inputRespuesta" name="quiz[respuesta]" value="<%= quiz.respuesta%>" />
+		</p>
+		<p>
 		<a href="/quizes"><button type="button">Cancelar</button></a>
 		<input type="submit" value="Enviar" />
+		</p>
 	</form> 

@@ -76,7 +76,8 @@ exports.new = function(req, res) {
         //tambien para la edicion
         tempQuiz = model.quiz.build({
             pregunta: "Escriba la pregunta",
-            respuesta: "Escriba la respuesta"
+            respuesta: "Escriba la respuesta",
+            tema: "otro"
         });
     }
     res.render('quizes/new', {
@@ -93,7 +94,8 @@ exports.create = function(req, res) {
         //Estamos modificando
         newQuiz = req.quiz;
         newQuiz.pregunta = req.body.quiz.pregunta;
-        newQuiz.respuesta = req.body.quiz.respuesta
+        newQuiz.respuesta = req.body.quiz.respuesta;
+        newQuiz.tema = req.body.quiz.tema;
     } else {
         //Creamos un objeto con los datos del formulario
         newQuiz = model.quiz.build(req.body.quiz);
@@ -107,7 +109,7 @@ exports.create = function(req, res) {
             });
         } else {
             newQuiz.save({
-                fields: ["pregunta", "respuesta"]
+                fields: ["pregunta", "respuesta", "tema"]
             }).then(function() {
                 res.redirect('/quizes');
             });
