@@ -2,7 +2,15 @@ var model = require('../models/models.js');
 
 //Autoload por el parametro :quizId
 exports.loadQuiz = function(req, res, next, quizId) {
-    model.quiz.findById(quizId).then(function(quiz) {
+    console.log("-------------- ENTRANDO EN loadQuiz");
+    model.quiz.find({
+        where: {
+            id: Number(quizId)
+        },
+        include: [{
+            model: model.comment
+        }]
+    }).then(function(quiz) {
         if (quiz) {
             req.quiz = quiz;
             next();

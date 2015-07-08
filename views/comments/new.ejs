@@ -1,0 +1,7 @@
+<p><%=quiz.pregunta%></p>
+<p>Añadir comentario:</p>
+
+<form method="post" action="/quizes/<%= quiz.id%>/comments">
+	<textarea id="comentario" name="comment[texto]"></textarea>
+	<button type="submit">Guardar</button>
+</form>

@@ -3,7 +3,7 @@ var router = express.Router();
 
 var quizController = require('../controllers/quiz_controller.js');
 var creditosController = require('../controllers/creditos_controller.js');
-
+var commentController = require('../controllers/comment_controller.js');
 
 console.log('VFG [router]');
 
@@ -27,6 +27,9 @@ router.get('/quizes/:quizId(\\d+)/answer', quizController.answer);
 router.get('/quizes/:quizId(\\d+)/edit', quizController.new);
 router.put('/quizes/:quizId(\\d+)/edit', quizController.create);
 router.delete('/quizes/:quizId(\\d+)/delete', quizController.delete);
+
+router.get('/quizes/:quizId(\\d+)/comments', commentController.new);
+router.post('/quizes/:quizId(\\d+)/comments', commentController.create);
 
 router.get('/author', creditosController.show);
 
