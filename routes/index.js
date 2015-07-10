@@ -19,6 +19,7 @@ router.get('/', function(req, res) {
 
 //Autoload de preguntas en funcion del parametro :quizId
 router.param('quizId', quizController.loadQuiz);
+router.param('commentId', commentController.loadComment);
 
 router.get('/quizes', quizController.index);
 router.get('/quizes/new', sessionController.isLogged, quizController.new);
@@ -31,6 +32,7 @@ router.delete('/quizes/:quizId(\\d+)/delete', sessionController.isLogged, quizCo
 
 router.get('/quizes/:quizId(\\d+)/comments', commentController.new);
 router.post('/quizes/:quizId(\\d+)/comments', commentController.create);
+router.get('/quizes/:quizId(\\d+)/comments/:commentId(\\d+)/publish', sessionController.isLogged, commentController.publish);
 
 router.get('/author', creditosController.show);
 

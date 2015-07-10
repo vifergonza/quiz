@@ -3,13 +3,24 @@ var model = require('../models/models.js');
 //Autoload por el parametro :quizId
 exports.loadQuiz = function(req, res, next, quizId) {
     console.log("-------------- ENTRANDO EN loadQuiz");
+    //En funcion de si el usuario esta logueado o no cargamos los comentarios publicados o todos
+    //Con la clausula all nos aseguramos de que siempre hace un left outer join
+    var includeModelComment = {
+        model: model.comment,
+        required: false
+    };
+    if (!req.session.user) {
+        console.log("-------------- Solo comentarios publicados");
+        includeModelComment.where = {
+            publicado: Boolean(true)
+        };
+    }
+
     model.quiz.find({
         where: {
             id: Number(quizId)
         },
-        include: [{
-            model: model.comment
-        }]
+        include: [includeModelComment]
     }).then(function(quiz) {
         if (quiz) {
             req.quiz = quiz;

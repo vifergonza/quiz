@@ -9,7 +9,16 @@
 	<h4>Comentarios:</strong></h4>
 <ol>
 	<% for (index in pregunta.Comments) { %>
-		<li> <%= pregunta.Comments[index].texto %></li>
+		<li>
+			<p> 
+				<%= pregunta.Comments[index].texto %>
+				<% if (session.user && !pregunta.Comments[index].publicado) { %>
+					<a href="/quizes/<%=pregunta.id%>/comments/<%=pregunta.Comments[index].id%>/publish">
+						<button type="button">Publicar</button>
+					</a>
+				<% } %>
+			</p>
+		</li>
 	<% } %>
 
 </ol>
