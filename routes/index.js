@@ -29,6 +29,7 @@ router.get('/quizes/:quizId(\\d+)/answer', quizController.answer);
 router.get('/quizes/:quizId(\\d+)/edit', sessionController.isLogged, quizController.new);
 router.put('/quizes/:quizId(\\d+)/edit', sessionController.isLogged, quizController.create);
 router.delete('/quizes/:quizId(\\d+)/delete', sessionController.isLogged, quizController.delete);
+router.get('/quizes/statistics', quizController.statistics);
 
 router.get('/quizes/:quizId(\\d+)/comments', commentController.new);
 router.post('/quizes/:quizId(\\d+)/comments', commentController.create);

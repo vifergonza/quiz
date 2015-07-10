@@ -137,8 +137,55 @@ exports.create = function(req, res) {
 };
 
 ///quizes/:quizId Delete
-exports.delete = function(req, res) {
+exports.delete = function(req, res, next) {
     req.quiz.destroy().then(function() {
         res.redirect('/quizes');
+    });
+};
+
+//GET /quizes/statistics
+exports.statistics = function(req, res) {
+    var sqlOptions = {
+        include: {
+            model: model.comment,
+            required: false
+        }
+    };
+
+    model.quiz.findAll(sqlOptions).then(function(quizes) {
+        var estadisticas = {
+            numeroPreguntas: 0,
+            numeroComentarios: 0,
+            mediaComentarios: 0,
+            numeroPreguntasSinComentarios: 0,
+            numeroPreguntasConComentarios: 0
+        };
+
+
+        for (var i = 0; i < quizes.length; i++) {
+            estadisticas.numeroPreguntas++;
+            console.log('-----------------------------------------------------------------');
+            console.log(quizes[i].pregunta);
+            console.log(quizes[i].Comments);
+            if (quizes[i].Comments.length > 0) {
+                estadisticas.numeroPreguntasConComentarios++;
+                estadisticas.numeroComentarios += quizes[i].Comments.length;
+            } else {
+                estadisticas.numeroPreguntasSinComentarios++;
+            }
+        };
+
+        if (estadisticas.numeroPreguntas > 0) {
+            estadisticas.mediaComentarios = estadisticas.numeroComentarios / estadisticas.numeroPreguntas;
+        }
+
+        res.render('quizes/estadisticas', {
+            statistics: estadisticas,
+            title: 'Quizes',
+            errors: []
+        });
+    }).catch(function(error) {
+        console.log(error);
+        next(error);
     });
 };
