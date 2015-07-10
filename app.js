@@ -38,6 +38,25 @@ app.use(function(req, res, next) {
     next();
 });
 
+app.use(function(req, res, next) {
+    if (req.session.user) {
+        console.log("Validando sesion: ");
+        console.log(req.session.user);
+        var newTime = (new Date()).getTime();
+        var lastTime = (new Date(req.session.user.lastAccess)).getTime();
+
+        console.log("Tiempo: " + newTime + " - " + lastTime + " = " + (newTime - lastTime));
+        if ((newTime - lastTime) > (2 * 60 * 1000)) {
+            console.log("Tiempo expirado!");
+            delete req.session.user;
+        } else {
+            req.session.user.lastAccess = new Date();
+            console.log("Nuevo lastAccess: " + req.session.user.lastAccess);
+        }
+    }
+    next();
+});
+
 app.use('/', routes);
 
 // catch 404 and forward to error handler
